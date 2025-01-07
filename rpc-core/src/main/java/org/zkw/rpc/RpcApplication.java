@@ -1,8 +1,11 @@
 package org.zkw.rpc;
 
 import lombok.extern.slf4j.Slf4j;
+import org.zkw.rpc.config.RegistryConfig;
 import org.zkw.rpc.config.RpcConfig;
 import org.zkw.rpc.constant.RpcConstant;
+import org.zkw.rpc.registry.Registry;
+import org.zkw.rpc.registry.RegistryFactory;
 import org.zkw.rpc.utils.ConfigUtils;
 
 /**
@@ -22,6 +25,15 @@ public class RpcApplication {
     public static void init(RpcConfig newRpcConfig) {
         rpcConfig = newRpcConfig;
         log.info("zkw-rpc init, config = {}", newRpcConfig.toString());
+
+        // 注册中心初始化
+        RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
+        Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
+        registry.init(registryConfig);
+        log.info("registry init, config = {}", registryConfig);
+
+        // 创建并注册 Shutdown Hook， JVM 退出时执行操作
+        Runtime.getRuntime().addShutdownHook(new Thread(registry::destroy));
     }
 
     /**

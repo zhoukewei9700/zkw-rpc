@@ -1,14 +1,15 @@
-package org.zkw.rpc.server;
+package org.zkw.rpc.server.http;
 
 import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
+import org.zkw.rpc.RpcApplication;
 import org.zkw.rpc.model.RpcRequest;
 import org.zkw.rpc.model.RpcResponse;
 import org.zkw.rpc.registry.LocalRegistry;
-import org.zkw.rpc.serializer.JdkSerializer;
 import org.zkw.rpc.serializer.Serializer;
+import org.zkw.rpc.serializer.SerializerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -23,7 +24,7 @@ public class HttpServerHandler implements Handler<HttpServerRequest> {
     @Override
     public void handle(HttpServerRequest request) {
         // 指定序列化器
-        final Serializer serializer = new JdkSerializer();
+        final Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
 
         // 记录日志
         System.out.println("Received request: " + request.method() + " " + request.uri());

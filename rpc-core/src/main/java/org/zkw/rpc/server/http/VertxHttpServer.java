@@ -1,12 +1,13 @@
-package org.zkw.rpc.server;
+package org.zkw.rpc.server.http;
 
 import io.vertx.core.Vertx;
+import org.zkw.rpc.server.Server;
 
 /**
  * @Author: zhoukewei
  * @CreateTime: 2025-01-05
  */
-public class VertxHttpServer implements HttpServer {
+public class VertxHttpServer implements Server {
     @Override
     public void doStart(int port) {
         // 创建Vert.x 实例

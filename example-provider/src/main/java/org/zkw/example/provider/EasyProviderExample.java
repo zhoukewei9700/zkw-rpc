@@ -2,8 +2,8 @@ package org.zkw.example.provider;
 
 import org.zkw.example.common.service.UserService;
 import org.zkw.rpc.registry.LocalRegistry;
-import org.zkw.rpc.server.HttpServer;
-import org.zkw.rpc.server.VertxHttpServer;
+import org.zkw.rpc.server.Server;
+import org.zkw.rpc.server.http.VertxHttpServer;
 
 /**
  * @Author: zhoukewei
@@ -15,7 +15,7 @@ public class EasyProviderExample {
         LocalRegistry.register(UserService.class.getName(), UserServiceImpl.class);
 
         // 启动web服务
-        HttpServer server = new VertxHttpServer();
+        Server server = new VertxHttpServer();
         server.doStart(8080);
     }
 }

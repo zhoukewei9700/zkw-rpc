@@ -1,6 +1,7 @@
 package org.zkw.rpc.config;
 
 import lombok.Data;
+import org.zkw.rpc.serializer.SerializerKeys;
 
 /**
  * @Author: zhoukewei
@@ -29,10 +30,10 @@ public class RpcConfig {
      */
     private Integer serverPort = 8080;
 
-//    /**
-//     * 序列化器
-//     */
-//    private String serializer = SerializerKeys.JDK;
+    /**
+     * 序列化器
+     */
+    private String serializer = SerializerKeys.JDK;
 //
 //    /**
 //     * 负载均衡器
@@ -53,9 +54,9 @@ public class RpcConfig {
      * 模拟调用
      */
     private boolean mock = false;
-//
-//    /**
-//     * 注册中心配置
-//     */
-//    private RegistryConfig registryConfig = new RegistryConfig();
+
+    /**
+     * 注册中心配置
+     */
+    private RegistryConfig registryConfig = new RegistryConfig();
 }
